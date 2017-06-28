@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    working_directory: /dockerfiles
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/dockerfiles.tar | true
+      - run:
+          name: Build Docker images
+          command: |
+            make build
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/dockerfiles.tar /dockerfiles
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/dockerfiles.tar
