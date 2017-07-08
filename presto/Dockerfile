@@ -3,7 +3,7 @@ MAINTAINER Kurt Ruppel <me@kurtruppel.com>
 
 EXPOSE 8080 8443
 
-ARG VERSION=0.179
+ARG VERSION=0.180
 
 RUN apk add --update openssl python tar
 
