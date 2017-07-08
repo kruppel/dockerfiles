@@ -12,9 +12,10 @@ RUN mkdir -p /opt && \
   mv /tmp/presto-server-$VERSION /opt/presto && \
   rm /tmp/presto.tar.gz
 
-RUN mkdir -p /opt/presto/etc
+RUN mkdir -p /opt/presto/etc/catalog
 
 COPY ./bin/* /opt/presto/bin/
+COPY ./catalog/* /opt/presto/etc/catalog/
 COPY ./config/common/* /opt/presto/etc/
 
 WORKDIR /opt/presto
