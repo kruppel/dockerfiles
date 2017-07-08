@@ -1,0 +1,8 @@
+#!/bin/sh -eu
+
+if grep -Fq uuid-generated-nodeid /opt/presto/etc/node.properties
+then
+  sed -i "s/\$(uuid-generated-nodeid)/$(cat /proc/sys/kernel/random/uuid)/g" /opt/presto/etc/node.properties
+fi
+
+exec "$(dirname "$0")/launcher.py" "$@"
