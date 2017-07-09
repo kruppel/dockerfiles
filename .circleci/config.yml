@@ -8,21 +8,16 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Load Docker image layer cache
+          name: Setup Docker image cache
           command: |
             set +o pipefail
-            docker load -i /caches/dockerfiles.tar | true
+            export CACHE_DIR=/caches
       - run:
           name: Build Docker images
           command: |
             apk add --no-cache make
             make build
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/dockerfiles.tar /dockerfiles
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
-            - /caches/dockerfiles.tar
+            - /caches
