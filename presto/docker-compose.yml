@@ -17,12 +17,12 @@ services:
       - "8081:8081"
       - "8443:8443"
     volumes:
-      - ./catalog:/opt/presto/catalog
+      - ./catalog:/opt/presto/etc/catalog
       - ./config/coordinator/config.properties:/opt/presto/etc/config.properties
   worker:
     build:
       context: .
     restart: always
     volumes:
-      - ./catalog:/opt/presto/catalog
+      - ./catalog:/opt/presto/etc/catalog
       - ./config/worker/config.properties:/opt/presto/etc/config.properties
