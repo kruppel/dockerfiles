@@ -1,0 +1,7 @@
+#!/bin/sh -eu
+
+printenv
+sed -i "s/\$GCLOUD_PROJECT_ID/$GCLOUD_PROJECT_ID/g" /opt/presto/etc/core.xml
+sed -i "s/\$GCLOUD_BUCKET/$GCLOUD_BUCKET/g" /opt/presto/etc/core.xml
+
+exec "$(dirname "$0")/launcher" "$@"
