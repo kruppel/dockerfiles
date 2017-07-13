@@ -1,4 +1,4 @@
-# Node.js wi Google Cloud SDK
+# Node.js with Google Cloud SDK
 
 Dockerfile for [Node.js](https://nodejs.org), with [Google Cloud SDK](https://cloud.google.com/sdk/).
 
@@ -31,7 +31,7 @@ jobs:
   build:
     working_directory: /ui
     docker:
-      - image: kruppel/node-cci-gcp:8-alpine
+      - image: kruppel/node-gcp:8-alpine
     steps:
       - checkout
       - run: mkdir -p /ui/artifacts
