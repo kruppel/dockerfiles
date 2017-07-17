@@ -7,9 +7,8 @@ tag=$2
 
 echo ${GCLOUD_SERVICE_KEY} | base64 -d > ${HOME}/gcloud-service-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-gcloud --quiet container clusters get-credentials starglobco --project=$GCLOUD_PROJECT_ID --zone=$GCLOUD_COMPUTE_ZONE
+gcloud --quiet container clusters get-credentials $GCLOUD_CLUSTER_NAME --project=$GCLOUD_PROJECT_ID --zone=$GCLOUD_COMPUTE_ZONE
 
 docker build -t $image:$tag .
 gcloud docker -- push $image:$tag
-chown -R ubuntu:ubuntu /home/ubuntu/.kube
 kubectl patch deployment ui -p '{"spec":{"template":{"spec":{"containers":[{"name":"ui","image":"'"$image"':'"$tag"'"}]}}}}'
