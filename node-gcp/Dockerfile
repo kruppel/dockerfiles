@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:9-alpine
 
 ENV CLOUD_SDK_VERSION 162.0.0
 
