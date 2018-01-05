@@ -1,0 +1,18 @@
+version: "3"
+services:
+  spark-master:
+    build:
+      context: .
+    restart: always
+    environment:
+      - SPARK_MASTER=1
+    ports:
+      - 7077:7077
+      - 8080:8080
+  spark-slave:
+    build:
+      context: .
+    restart: always
+    ports:
+      - 7078:7078
+      - 8081:8081
